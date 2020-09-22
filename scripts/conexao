@@ -408,7 +408,7 @@ pipeline_prefetch off" >>$var_sqd
 				fun_ports() {
 					sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear >/dev/null 2>&1
 					sed -i "s/DROPBEAR_PORT=22/DROPBEAR_PORT=$porta/g" /etc/default/dropbear >/dev/null 2>&1
-					sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110"/g' /etc/default/dropbear >/dev/null 2>&1
+				#	sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110"/g' /etc/default/dropbear >/dev/null 2>&1
 				}
 				echo ""
 				echo -e "\033[1;32mCONFIGURANDO PORTA DROPBEAR !\033[0m"
@@ -547,7 +547,7 @@ pipeline_prefetch off" >>$var_sqd
 					#cat cert.pem key.pem >>/etc/stunnel/stunnel.pem
 					#rm key.pem cert.pem >/dev/null 2>&1
 					sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-					cd /etc/stunnel && wget sshplus.xyz/script/stunnel.pem && cd $HOME
+					cd /etc/stunnel && wget https://raw.githubusercontent.com/script90/30/master/scripts/stunnel.pem && cd $HOME
 				}
 				fun_bar 'ssl_certif'
 				echo -e "\n\033[1;32mINICIANDO O SSL TUNNEL !\033[0m"
@@ -1204,15 +1204,9 @@ exit 0' >$RCLOCAL
 				client
 				dev tun
 				proto $PROTOCOL
-				sndbuf 0
-				rcvbuf 0
 				remote /SSHPLUS? $porta
 				#payload "HTTP/1.0 [crlf]Host: m.youtube.com[crlf]CONNECT HTTP/1.0[crlf][crlf]|[crlf]"
 				http-proxy $IP 8080
-				resolv-retry 5
-				nobind
-				persist-key
-				persist-tun
 				remote-cert-tls server
 				cipher AES-256-CBC
 				comp-lzo yes
@@ -1253,7 +1247,7 @@ exit 0' >$RCLOCAL
 		[[ $(screen -list | grep -wc 'openpy') != '0' ]] && sksop="\033[1;32m◉" || sksop="\033[1;31m○"
 		echo ""
 		echo -e "\033[1;31m[\033[1;36m1\033[1;31m] \033[1;37m• \033[1;33mSOCKS SSH $var_sks1 \033[0m"
-		echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mSOCKS OEPNVPN $sksop \033[0m"
+		echo -e "\033[1;31m[\033[1;36m2\033[1;31m] \033[1;37m• \033[1;33mSOCKS OPENVPN $sksop \033[0m"
 		echo -e "\033[1;31m[\033[1;36m3\033[1;31m] \033[1;37m• \033[1;33mABRIR PORTA\033[0m"
 		echo -e "\033[1;31m[\033[1;36m4\033[1;31m] \033[1;37m• \033[1;33mALTERAR STATUS\033[0m"
 		echo -e "\033[1;31m[\033[1;36m0\033[1;31m] \033[1;37m• \033[1;33mVOLTAR\033[0m"
