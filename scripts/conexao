@@ -110,8 +110,18 @@
 				verif_ptrs $porta
 			done
 			echo -e "\n\033[1;32mINSTALANDO SQUID PROXY\033[0m"
+sudo touch /etc/apt/sources.list.d/trusty_sources.list
+echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe" | sudo tee --append /etc/apt/sources.list.d/trusty_sources.list > /dev/null
+sqd3_down () {
+wget https://raw.githubusercontent.com/script90/squid3/master/squid3 -o /dev/null
+cp squid3 /etc/init.d/
+chmod +x /etc/init.d/squid3
+sudo update-rc.d squid3 defaults
+rm squid3
+sleep 1
+}
 			echo ""
-			fun_bar 'apt-get update -y' 'apt-get install squid3 -y'
+			fun_bar 'apt-get update -y' 'apt install -y squid3=3.3.8-1ubuntu6 squid=3.3.8-1ubuntu6 squid3-common=3.3.8-1ubuntu6' 'sqd3_down'
 			if [[ -d "/etc/squid/" ]]; then
 				var_sqd="/etc/squid/squid.conf"
 				var_pay="/etc/squid/payload.txt"
