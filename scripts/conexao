@@ -109,7 +109,7 @@
 			for porta in $(echo -e $portass); do
 				verif_ptrs $porta
 			done
-			echo -e "\n\033[1;32mINSTALANDO SQUID PROXY\033[0m"
+			echo -e "\n\033[1;32mINSTALANDO SQUID3 PROXY\033[0m"
 sudo touch /etc/apt/sources.list.d/trusty_sources.list
 echo "deb http://us.archive.ubuntu.com/ubuntu/ trusty main universe" | sudo tee --append /etc/apt/sources.list.d/trusty_sources.list > /dev/null
 sqd3_down () {
@@ -121,7 +121,7 @@ rm squid3
 sleep 1
 }
 			echo ""
-			fun_bar 'apt-get update -y' 'apt install -y squid3=3.3.8-1ubuntu6 squid=3.3.8-1ubuntu6 squid3-common=3.3.8-1ubuntu6' 'sqd3_down'
+			fun_bar 'apt-get update -y' 'apt install -y squid3=3.3.8-1ubuntu6 squid=3.3.8-1ubuntu6 squid3-common=3.3.8-1ubuntu6'
 			if [[ -d "/etc/squid/" ]]; then
 				var_sqd="/etc/squid/squid.conf"
 				var_pay="/etc/squid/payload.txt"
@@ -129,7 +129,7 @@ sleep 1
 				var_sqd="/etc/squid3/squid.conf"
 				var_pay="/etc/squid3/payload.txt"
 			else
-				echo -e "\n\033[1;31mERRO ! SQUID PROXY CORROMPEU\033[0m"
+				echo -e "\n\033[1;31mERRO ! SQUID3 PROXY CORROMPEU\033[0m"
 				sleep 2
 				fun_conexao
 			fi
@@ -181,7 +181,7 @@ pipeline_prefetch off" >>$var_sqd
 			}
 			echo -e "\n\033[1;32mCONFIGURANDO SQUID PROXY\033[0m"
 			echo ""
-			fun_bar 'sqd_conf'
+			fun_bar 'sqd3_down' 'sqd_conf'
 			echo -e "\n\033[1;32mSQUID INSTALADO COM SUCESSO!\033[0m"
 			sleep 3.5s
 			fun_conexao
